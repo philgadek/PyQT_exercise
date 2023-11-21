@@ -7,7 +7,7 @@ from PyQt6.QtGui import QIcon, QAction, QPixmap, QIntValidator
 
 
 class Window(QMainWindow):
-    #Dodanie konstruktora przyjmującego okno nadrzędne
+    
     def __init__(self):
         super(Window, self).__init__()
         self.setWindowTitle('AC, FG, MP')
@@ -15,13 +15,13 @@ class Window(QMainWindow):
         self.createTabs()
         self.fileName2 = ""  
         
-    # Funkcja dodająca pasek menu do okna
+   
     def createMenu(self):
-        # Stworzenie paska menu
+        
         self.menu = self.menuBar()
-        # Dodanie do paska listy rozwijalnej o nazwie File
+        
         self.fileMenu = self.menu.addMenu("File")
-        # Dodanie do menu File pozycji zamykającej aplikacje
+        
         self.actionExit = QAction('Exit', self)
         self.actionExit.setShortcut('Ctrl+Q')
         self.actionExit.triggered.connect(self.close)
@@ -29,7 +29,7 @@ class Window(QMainWindow):
         
         # Task 1
         self.fileMenu = self.menu.addMenu("Task1")
-        # Przycisk otwierający zdjęcie
+        
         self.actionOpen1 = QAction('Open', self)
         self.actionOpen1.setShortcut('Ctrl+O')
         self.actionOpen1.triggered.connect(self.openPNG)
@@ -67,22 +67,19 @@ class Window(QMainWindow):
         self.fileMenu.addAction(self.actionClear3)
 
     
-    # Funkcja dodająca wenętrzeny widżet do okna
+    
     def createTabs(self):
-        # Tworzenie widżetu posiadającego zakładki
+        
         self.tabs = QTabWidget()
         
-        # Stworzenie osobnych widżetów dla zakładek
         self.tab_1 = QWidget()
         self.tab_2 = QWidget()
         self.tab_3 = QWidget()
         
-        # Dodanie zakładek do widżetu obsługującego zakładki
         self.tabs.addTab(self.tab_1, "Task 1")
         self.tabs.addTab(self.tab_2, "Task 2")        
         self.tabs.addTab(self.tab_3, "Task 3")
 
-        # Dodanie widżetu do głównego okna jako centralny widżet
         self.setCentralWidget(self.tabs)
         
         # Tab 1
@@ -190,9 +187,6 @@ class Window(QMainWindow):
         
     
 
-
-# Uruchomienie okna
-# if __name__ == '__Apppp__':
 app = QApplication([])
 win = Window()
 win.setGeometry(100,100,640,480)
