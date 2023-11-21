@@ -11,10 +11,10 @@ class Window(QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
         self.setWindowTitle('AC, FG, MP')
-        
         self.createMenu()
         self.createTabs()
-          
+        self.fileName2 = ""  
+        
     # Funkcja dodająca pasek menu do okna
     def createMenu(self):
         # Stworzenie paska menu
@@ -148,22 +148,20 @@ class Window(QMainWindow):
         self.tab_2.notepad.clear()
         
     def note_open(self):
-        self.tabs.setCurrentIndex(1) 
-        fileName2, _ = QFileDialog.getOpenFileName(self.tab_2, "Wybierz plik tekstowy", "", "TXT (*.txt)")
-        title = fileName2 + ".txt"
-        if title:
-            with open(title, 'r') as f: 
-                print(title)
-                self.tab_2.notepad.resize(self.size())
+        self.tabs.setCurrentIndex(1)
+        self.fileName2, _ = QFileDialog.getOpenFileName(self.tab_2, "Wybierz plik tekstowy", "", "TXT (*.txt)")
+        if self.fileName2:
+            with open(self.fileName2, 'r') as f: 
+                print(self.fileName2)
                 self.note_clear()
-                self.tab_2.notepad.insertPlainText(title)
+                self.tab_2.notepad.insertPlainText(f.read())       
             
     def note_save(self):
         self.tabs.setCurrentIndex(1)
         text_to_save = self.tab_2.notepad.toPlainText()
-        title = text_to_save + ".txt"
-        if title:
-            with open(title, 'w') as f:
+        print(self.fileName2)
+        if self.fileName2:
+            with open(self.fileName2, 'w') as f:
                 f.write(text_to_save)
         else:
             self.note_saveas()
@@ -171,19 +169,17 @@ class Window(QMainWindow):
     def note_saveas(self):
         self.tabs.setCurrentIndex(1) 
         fileName, _ = QFileDialog.getSaveFileName(self.tab_2, "Wybierz plik tekstowy",  "", "TXT (*.txt)")
-        text_to_read2 = self.tab_2.notepad.toPlainText()
+        text_to_save2 = self.tab_2.notepad.toPlainText()
         if fileName:
-            with open(fileName, 'r') as f: 
-                self.tab_2.notepad.resize(self.size())
-                self.note_clear()
-                self.tab_2.notepad.insertPlainText(text_to_read2)   
+            with open(fileName, 'w') as f: 
+                f.write(text_to_save2)
+                
     
     # Task 3    
     def text_update(self):
-        sum = ""
-        sum = self.tab_3.lineEditA.text() + " " + self.tab_3.lineEditB.text() + " " + self.tab_3.lineEditC.text()
+        suma = self.tab_3.lineEditA.text() + " " + self.tab_3.lineEditB.text() + " " + self.tab_3.lineEditC.text()
         self.tab_3.lineEditABC.clear()
-        self.tab_3.lineEditABC.insertPlainText(sum)
+        self.tab_3.lineEditABC.insertPlainText(suma)
 
     
     def fields_clear(self):
